@@ -26,19 +26,17 @@ public class UrlServiceImpl implements UrlService{
     public Url generateShortLink(UrlDto urlDto) {
         if(StringUtils.isNotEmpty(urlDto.getUrl()))
         {
-            //check encoded url exists
-            //if it does then don't call generateShortLink
             String encodedUrl = encodeUrl(urlDto.getUrl());
             Url urlToPersist = new Url();
             urlToPersist.setOriginalUrl(urlDto.getUrl());
             urlToPersist.setShortLink(encodedUrl);
             Url urlToReturn = presistShortLink(urlToPersist);
-
             if(urlToReturn != null)
+
                 return urlToReturn;
 
             return null;
-        }
+            }
 
         return null;
     }
@@ -54,6 +52,11 @@ public class UrlServiceImpl implements UrlService{
 
     @Override
     public Url presistShortLink(Url url) {
+
+        Url dbUrl = getEncodedShortLink(url.getShortLink());
+        if(dbUrl != null){
+            return dbUrl;
+        }
         Url urlToReturn = urlRepository.save(url);
 
         return urlToReturn;
