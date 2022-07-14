@@ -1,4 +1,4 @@
-package com.example.urlshortenerapplication.Controller;
+package com.example.urlshortenerapplication.controller;
 
 import com.example.urlshortenerapplication.model.Url;
 import com.example.urlshortenerapplication.model.UrlDto;
